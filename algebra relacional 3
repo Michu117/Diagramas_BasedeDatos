@@ -1,0 +1,36 @@
+π titulo (σ estado == 'baja' (Libro))
+
+SELECT titulo FROM libro WHERE estado ==”bajo”
+
+CREATE VIEW view_libro AS SELECT titulo FROM libro WHERE estado == “bajo”
+
+
+
+π nombres (σ equipo_futbol == 'Libertad' (hinchas))
+
+SELECT nombres FROM hinchas WHERE equipo_futbol == ”Libertad”
+
+CREATE VIEW view_hinchas AS SELECT nombres FROM hinchas WHERE equipo_futbol == “Libertad”
+
+
+π nombres (σ equipo_futbol (equipo_futbolsucursal))
+
+
+SELECT * FROM hinchas WHERE equipo_futbol == ”Libertad”
+
+
+π nombres, apellidos, equipos_futbol (σ equipos_futbol == nombre_equipo(hinchas ⋈ (σ categoria = 'primera' (equipos_primera))))
+
+
+SELECT * FROM equipos_primera WHERE categoria == ‘Primera’
+
+Inner Join
+SELECT * FROM tabla1 INNER JOIN tabla2 ON condición
+
+SELECT * FROM hinchas INNER JOIN (SELECT * FROM equipos_primera WHERE categoria == ‘Primera’) ON equipos_futbol == nombre_equipo;
+
+SELECT nombres, apellidos, equipo FROM hinchas INNER JOIN (SELECT * FROM equipos_primera WHERE categoria == ‘Primera’) ON equipos_futbol == nombre_equipo;
+
+SELECT * FROM hinchas WHERE equipo_futbol IN (select nombre_equipo FROM equipo_primera WHERE categoria == ‘primera’);
+
+CREATE VIEW hinchas_primera AS SELECT nombres, apellidos, equipo FROM hinchas INNER JOIN (SELECT * FROM equipos_primera WHERE categoria == ‘Primera’) ON equipos_futbol == nombre_equipo;

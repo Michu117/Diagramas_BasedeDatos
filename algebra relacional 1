@@ -1,0 +1,32 @@
+Proyeccion
+π nombre, duracion (curso)
+π ciudad (alumno)
+
+Selección:
+σ duracion >= 15 (curso)
+R1 = σ duracion >= 15 (curso)
+
+Combinadas:
+R2 = π nombre(σ duracion >= 15 (curso))
+R3 = (σ id_alumno == 11(apoderado))
+R4 = π fono(σ id_alumno == 31(apoderado))
+
+Producto Cartesiano:
+R5 = (inscrito) * (alumno) 
+
+Renombrar:
+R6= (ρ nombre ➡ nombreA, id ➡ idA (alumno)) * apoderado
+
+
+R7= σ idA == 31((ρ nombre ➡ nombreA, id ➡ idA (alumno)) * apoderado)
+
+R8 = π nombre, fono(σ idA == id_alumno (σ nombreA == "Rosita"(ρ nombre ➡ nombreA, id ➡ idA(alumno)) * apoderado))
+
+
+
+
+π cod (σ nombre == "Matemáticas" (curso))
+((ρ cod ➡ codigoC (curso)) * inscrito)
+σ nombre == "Matemáticas" ((ρ cod ➡ codigoC (curso)) * inscrito)
+
+R9 = π nombreA (σ id == id_al (ρ nombre➡ nombreA(alumno) * (σ codigoC == cod (σ nombre == "Matemáticas" ((ρ cod ➡ codigoC (curso)) * inscrito)))))

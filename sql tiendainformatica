@@ -1,0 +1,90 @@
+CREATE DATABASE tiendainformatica;
+
+CREATE TABLE cliente(
+codigo VARCHAR(25) PRIMARY KEY,
+nombre VARCHAR(25) NOT NULL,
+apellidos VARCHAR (25) NOT NULL,
+direccion TEXT,
+telefono VARCHAR(12),
+correo VARCHAR(50) UNIQUE
+);
+
+CREATE TABLE producto(
+codigoP VARCHAR(25) PRIMARY KEY,
+descripcion VARCHAR(25) NOT NULL,
+existencia INT NOT NULL,
+precio DOUBLE
+);
+
+CREATE TABLE proveedor(
+codigoPro VARCHAR(25) PRIMARY KEY,
+nombre VARCHAR(25) NOT NULL,
+apellidos VARCHAR(25) NOT NULL,
+telefono VARCHAR(12),
+provincia SET('LOJA', 'ZAMORA', 'EL ORO') NOT NULL,
+direccion TEXT
+);
+
+CREATE TABLE compra(
+idCompra INT AUTO_INCREMENT PRIMARY KEY,
+total_compra DOUBLE NOT NULL,
+fecha DATE NOT NULL,
+cedula_cliente VARCHAR(25) NOT NULL,
+codigo_producto VARCHAR(25) NOT NULL,
+FOREIGN KEY (cedula_cliente) REFERENCES cliente(codigo),
+FOREIGN KEY (codigo_producto) REFERENCES producto(codigoP)
+);
+
+CREATE TABLE suministra(
+idSuministra VARCHAR(25) PRIMARY KEY,
+codigo_producto VARCHAR(25),
+codigo_proveedor VARCHAR(25),
+FOREIGN KEY (codigo_producto) REFERENCES producto(codigoP),
+FOREIGN KEY (codigo_proveedor) REFERENCES proveedor(codigoPro)
+);
+
+INSERTAR
+INSERT INTO cliente (codigo, nombre, apellidos, correo) VALUES ("C001", "Fabricio", "Ruiz", "fabricio.ruiz@unl.edu.ec");
+
+INSERT INTO cliente (codigo, nombre, apellidos, correo) VALUES ("C002", "Arelys", "Ajila", "arelys.ajila@unl.edu.ec");
+
+INSERT INTO cliente (codigo, nombre, apellidos, correo) VALUES ("C003", "Douglas", "Carreno", "douglas.carreno@unl.edu.ec");
+
+INSERT INTO cliente (codigo, nombre, apellidos, correo) VALUES ("C004", "Vivi", "Cordova", "vivi.cordova@unl.edu.ec");
+
+INSERT INTO cliente (codigo, nombre, apellidos, correo) VALUES ("C005", "Maria", "Valarezo", "maria.valarezo@unl.edu.ec");
+
+SELECT * FROM cliente;
+
+ELIMINAR
+DELETE FROM cliente WHERE codigo = “C001”;
+
+DELETE FROM cliente WHERE codigo = “C001” OR  correo = “fabricio.ruiz@unl.edu.ec”;
+
+
+SELECCIONAR TODO
+SELECT * FROM cliente;
+
+
+ORDENAR
+SELECT * FROM cliente ORDER BY nombre;
+
+SELECT * FROM cliente ORDER BY apellidos, nombre DESC;
+
+SELECT * FROM cliente ORDER BY apellidos, nombre DESC LIMIT 3;
+
+POSICIONES
+SELECT * FROM cliente WHERE apellidos LIKE 'a%';
+
+SELECT * FROM cliente WHERE nombre LIKE 'a%';
+
+- segunda posición
+SELECT * FROM cliente WHERE nombre LIKE '_a%';
+
+- ultima posición
+SELECT * FROM cliente WHERE apellidos LIKE '%z_';
+
+FILTRADO TIPO SET
+SELECT * FROM cliente WHERE apellidos IN("Ajila", "Ruiz");
+
+SELECT * FROM cliente WHERE apellidos NOT IN("Ajila", "Ruiz");

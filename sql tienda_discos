@@ -1,0 +1,38 @@
+CREATE DATABASE tienda_discos;
+USE tienda_discos;
+
+CREATE TABLE cancion(
+idCancion VARCHAR(25) PRIMARY KEY,
+titulo VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE table generoMusica(
+idGenero VARCHAR(25) PRIMARY KEY
+);
+
+CREATE TABLE cantante(
+idCantante VARCHAR(25) PRIMARY KEY,
+nombre VARCHAR(25) NOT NULL,
+pais SET('Ecuador', 'Peru', 'Colombia') NOT NULL
+);
+
+
+CREATE TABLE disco(
+idDisco VARCHAR(25) PRIMARY KEY,
+titulo VARCHAR(50) UNIQUE NOT NULL,
+precio FLOAT NOT NULL,
+genero VARCHAR(25) NOT NULL,
+cantante VARCHAR(25) NOT NULL,
+FOREIGN KEY (genero) REFERENCES generoMusica(idGenero),
+FOREIGN KEY (cantante) REFERENCES cantante(idCantante)
+);
+
+
+CREATE TABLE contiene(
+idContiene VARCHAR(25) PRIMARY KEY,
+posicion INT UNIQUE NOT NULL,
+id_cancion VARCHAR(25) NOT NULL,
+id_disco VARCHAR(25) NOT NULL,
+FOREIGN KEY (id_cancion) REFERENCES cancion(idCancion),
+FOREIGN KEY (id_disco) REFERENCES disco(idDisco)
+);

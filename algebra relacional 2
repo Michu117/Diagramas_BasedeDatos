@@ -1,0 +1,12 @@
+Join Condicional
+
+R10= (ρ id➡id_alumno, nombre➡nombre_alumno(alumno)) ⋈ apoderado
+
+R10= π nombre_alumno, edad, nombre, fono((ρ id➡id_alumno, nombre➡nombre_alumno(alumno)) ⧑ apoderado)
+
+
+
+
+σ duracion >= 15(π nombre_alumno, duracion, nombre(((ρ  id➡id_alumno, nombre➡nombre_alumno(alumno))⧑(inscrito))⧑curso))
+
+π curso, duracion_curso, alumno(σ duracion_curso>=15(σ id==id_al((ρ nombre➡curso, duracion➡duracion_curso(curso)⧓inscrito)⧓ρ nombre➡alumno(alumno))))
